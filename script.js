@@ -13,6 +13,8 @@ $('#closeChat').click(function() {
 function sendChatMessage(message) {
     const chatMessages = document.getElementById('chatMessages');
     chatMessages.innerHTML += `<div class="user-message">${message}</div>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight; // Ensure scrolling after adding user message
+
     const payload = {
         messages: [{
             "role": "system",
@@ -38,11 +40,12 @@ function sendChatMessage(message) {
         console.log("Groq API response:", data);
         const botReply = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content ? data.choices[0].message.content : "No reply received";
         chatMessages.innerHTML += `<div class="bot-message">${botReply}</div>`;
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Ensure scrolling after adding bot message
     })
     .catch(error => {
         console.error("Error calling Groq API:", error);
         chatMessages.innerHTML += `<div class="bot-message">Error retrieving response.</div>`;
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Ensure scrolling after adding error message
     });
 }
 
