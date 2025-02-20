@@ -857,7 +857,8 @@ footer span a:hover {
     overflow-y: auto;
     flex: 1;
     background: #f9f9f9;
-}
+    max-height: 300px; 
+} 
 
 .user-message {
     background: #e1ffc7; /* User message color */
